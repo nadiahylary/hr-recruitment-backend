@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" style="color:white;">HR Recruitment Platform</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <form action="${this.apiServerUrl}/profiles/?category" method="GET">
+          <select class="form-control" name="category"  id="getIndustry"  (change)="searchProfiles({event : {event : $event}})" >
+            <option *ngFor="let profile of profiles" (select)="searchProfiles({event : {event : $event}})" ) value="{{profile.category}}">{{profile.category}}</option>
+          </select>
+        </form>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="${this.apiServerUrl}/profiles/?search" method="GET">
+      <input type="search" name="searchword" id="search"  class="form-control mr-sm-2" (keyup.enter)="searchProfiles($event)" placeholder="search profiles..." required>
+      <button type="submit" type="button" class="btn btn-danger"  name="search" (click)="searchProfiles({event : {event : $event}})" value="rechercher">Rechercher</button>
+    </form>
+  </div>
+</nav>
+
+<div class="col-md-6 user-container">
+   <table  mdbTable #tableEl="mdbTable" class="table table-striped">
+      <thead>
+      <tr>
+        <th *ngFor="let head of headElements; let i = index" scope="col">{{ head }}
+        <!--</th>
+        <th>Index</th>
+        <th>Profile Picture</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Profile URL</th>
+        <th>Location</th>
+        <th>Description</th>
+        <th>Experience</th>
+        <th>Current Position</th>
+        <th>Skills</th>
+        <th>Confirmed Skills</th>-->
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let element of profiles">
+        <td >{{element?.index}}</td>
+        <td ><img src="{{element?.profile_picture}}" alt="" width=50 height="50"></td>
+        <td >{{element?.name}}</td>
+        <td >{{element?.category}}</td>
+        <td >{{element?.linkedin}}</td>
+        <td >{{element?.location}}</td>
+        <td >{{element?.description}}</td>
+        <td >{{element?.Experience}}</td>
+        <td >{{element?.position}}</td>
+        <td >{{element?.skills}}</td>
+        <td >{{element?.clean_skills}}</td>
+      </tr>
+      <tr>
+      </tr>
+      </tbody>
+      <tfoot class="grey lighten-5 w-100">
+      <tr>
+        <td colspan="4">
+          <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+<!--Notification for no employees-->
+<div *ngIf="profiles?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO Profiles!</h4>
+    <p>No Profiles were found to match your search.</p>
+  </div>
+</div>

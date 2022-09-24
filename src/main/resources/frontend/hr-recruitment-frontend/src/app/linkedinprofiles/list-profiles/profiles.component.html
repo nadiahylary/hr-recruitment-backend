@@ -1,0 +1,110 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" style="color:white;">HR Recruitment Platform</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+     <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+         <select class="form-control" name="category" id="getIndustry" #key =""  *ngFor="let profile of profiles" [ngModel]="key" (change)="searchProfiles(key.value)">
+            <option value="{{profile.category}}">{{profile.category}}</option>
+      </select>
+        </li>
+     </ul>
+     <form class="form-inline my-2 my-lg-0">
+         <input type="search" name="searchword" #key =""  id="search" class="form-control mr-sm-2" [ngModel]="key" (change)="searchProfiles(key.value)"  placeholder="search profiles..." required>
+
+     </form>
+  </div>
+</nav>
+<div class="container" id="main-container">
+<div class="row">
+  <div *ngFor="let profile of profiles" class="col-md-6 col-xl-3">
+     <div class="card m-b-30">
+        <div class="card-body row">
+           <div class="col-6">
+              <a href=""><img src="{{profile?.profile_picture}}" alt="" class="img-fluid rounded-circle w-60"></a>
+           </div>
+           <div class="col-6 card-title align-self-center mb-0">
+              <h5>{{profile?.name}}</h5>
+              <p class="m-0">{{profile?.position}}</p>
+              <p class="m-0">{{profile?.category}}</p>
+              <p class="m-0">{{profile?.location}}</p>
+           </div>
+        </div>
+        <ul class="list-group list-group-flush">
+           <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Profile url: {{profile?.linkedin}}</li>
+           <li class="list-group-item"><i class="fa fa-phone float-right"></i>About : {{profile?.description}}</li>
+           <li class="list-group-item"><i class="fa fa-phone float-right"></i>Experience : {{profile?.Experience}}</li>
+           <li class="list-group-item"><i class="fa fa-phone float-right"></i>Skills : {{profile?.skills}}</li>
+           <li class="list-group-item"><i class="fa fa-phone float-right"></i>Confirmed Skills : {{profile?.clean_skills}}</li>
+        </ul>
+     </div>
+  </div>
+</div>
+</div>
+<!-- Notification for no profiles -->
+<div *ngIf="profiles?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+<div class="alert alert-info" role="alert">
+  <h4 class="alert-heading">NO PROFILES!</h4>
+  <p>No Profiles were found to match your search.</p>
+</div>
+</div>
+
+
+<!--<div class="col-md-6 user-container">
+    <h2 style="margin: auto"> User Details</h2>
+    <form>
+        <input type="text" name="searchword" placeholder="search by anything"><button type="submit">Search</button>
+        <select name="industry" id="getIndustry">
+
+            <option value=""></option>
+        </select>
+
+    </form>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="hidden">Id</th>
+        <th>Index</th>
+        <th>Categorie</th>
+        <th>Profile URL</th>
+        <th>Profile Picture</th>
+        <th>Description</th>
+        <th>Experience</th>
+        <th>Name</th>
+        <th>Current Position</th>
+        <th>Location</th>
+        <th>Skills</th>
+        <th>Clean Skills</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let profile of profiles">
+        <td class="hidden"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><button><i>Add to favorite</i></button>
+      </tr>
+      <tr>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+Notification for no employees
+<div *ngIf="profiles?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO Profiles!</h4>
+    <p>No Profiles were found to match your search.</p>
+  </div>
+</div> -->
